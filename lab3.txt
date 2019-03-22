@@ -1,0 +1,117 @@
+template <typename T>
+
+void SimpleVector<T>::push_back(T val)
+
+{
+
+       // Allocate a new array 1 element larger than the current one.
+
+       T *tempPtr = new T [arraySize + 1];
+
+ 
+
+       // Copy the current array contents to the new array
+
+       for(int count = 0; count < arraySize; count++)
+
+              *(tempPtr + count) = *(aptr + count);
+
+ 
+
+       // Copy the argument value to the end of the array
+
+       *(tempPtr + arraySize) = val;
+
+ 
+
+       // Get rid of the old array
+
+       if (arraySize > 0)
+
+              delete [] aptr;
+
+ 
+
+       // Make aptr point to the new array
+
+       aptr = tempPtr;
+
+ 
+
+       // Adjust arraySize
+
+       arraySize++;
+
+}
+
+ 
+
+//***********************************************************
+
+// The pop_back function removes the last element           *
+
+// of the vector. It also returns that value.               *
+
+//***********************************************************
+
+ 
+
+template <typename T>
+
+T SimpleVector<T>::pop_back()
+
+{
+
+       if (arraySize == 0)
+
+              throw "ERROR: vector contains no values.\n";
+
+       else
+
+       {
+
+              // Save the last value in the array
+
+              T lastValue = aptr[arraySize - 1];
+
+ 
+
+              // Allocate a new array 1 element smaller than the current one.
+
+              T *tempPtr = new T [arraySize - 1];
+
+ 
+
+              // Copy the current array contents (except the last element)
+
+              // to the new array
+
+              for(int count = 0; count < (arraySize - 1); count++)
+
+                     *(tempPtr + count) = *(aptr + count);
+
+ 
+
+              // Get rid of the old array
+
+              delete [] aptr;
+
+ 
+
+              // Make aptr point to the new array
+
+              aptr = tempPtr;
+
+ 
+
+              // Adjust arraySize
+
+              arraySize--;
+
+ 
+
+              return lastValue;
+
+       }
+
+}
